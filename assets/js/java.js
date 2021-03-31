@@ -1,68 +1,58 @@
 dateEl= document.getElementById('TodaysDate');
 timeEl= document.getElementById('timeSet');
 inputDayPlanEl = document.getElementById('text');
-var nine = document.getElementById('9am');
-var ten = document.getElementById('10am');
-var eleven = document.getElementById('11am');
-var twevle = document.getElementById('12pm');
-var one = document.getElementById('1pmm');
-var two = document.getElementById('2pm');
-var three = document.getElementById('3pm');
-var four = document.getElementById('4pm');
-var five = document.getElementById('5pm');
-var six = document.getElementById('6pm');
 
 
 
+      
+    
+$(".saveBtn").on("click",function () { 
+   
+    var input = $(this).siblings(".description").val()
+    var time = $(this).parent().attr('id')
 
-//savingItems();
+    localStorage.setItem(time,input)
+
+    
+ 
+});
 
 
-//submitBtn.addEventListener('click', function(event){
-    //event.preventDefault();
 
-    //var timePlaned = 9
+function displayEvent(){
+  
+    var currentTime = moment().hours()
+    $('.time-block').each(function(){
+        var compareTime = parseInt($(this).attr('id').split('-')[1])
         
+        if(compareTime<currentTime){
+            $(this).addClass('past')
+        }else if(compareTime>currentTime){
+            $(this).removeClass('past')
+            $(this).addClass('future')
+        }else{
+            $(this).removeClass('past')
+            $(this).removeClass('future')
+            $(this).addClass('present')
+        }
+    }) 
     
-$(".btn").click(function (e) { 
-    e.preventDefault();
-    console.log(this)
-
-    var dayActivity ={
-        nineam : nine.value.trim(),
-        tenam : ten.value.trim(),
-        elevenam : eleven.value.trim(),
-        //twevleam : twevle.value.trim(),
-        //onepm : one.value.trim(),
-        //nineam : nine.value.trim(),
-        //nineam : nine.value.trim(),
-        //nineam : nine.value.trim(),
-        //nineam : nine.value.trim(),
-    }
- planEvents();displayEvent();
-
-
-    
-    function planEvents(){
-     localStorage.setItem("activity",  JSON.stringify(dayActivity));
 }
 
-    function displayEvent(){
+displayEvent(); 
+var check = setInterval(displayEvent,10000)
 
-        var dayPlans = JSON.parse(localStorage.getItem("activity"));
 
-        console.log(dayPlans)
-    }
-   
-    
-    
-
-    
-
-    //document.getElementById("9am") = dayActivity
-    console.log()
-
-});
+$('#hour-9 .description').val(localStorage.getItem('hour-9'))
+$('#hour-9 .description').val(localStorage.getItem('hour-10'))
+$('#hour-9 .description').val(localStorage.getItem('hour-11'))
+$('#hour-9 .description').val(localStorage.getItem('hour-12'))
+$('#hour-9 .description').val(localStorage.getItem('hour-13'))
+$('#hour-9 .description').val(localStorage.getItem('hour-14'))
+$('#hour-9 .description').val(localStorage.getItem('hour-15'))
+$('#hour-9 .description').val(localStorage.getItem('hour-16'))
+$('#hour-9 .description').val(localStorage.getItem('hour-17'))
+$('#hour-9 .description').val(localStorage.getItem('hour-18'))
 
 
 
